@@ -1,6 +1,5 @@
 package com.example.bapp;
 
-import com.mysql.cj.protocol.Resultset;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
