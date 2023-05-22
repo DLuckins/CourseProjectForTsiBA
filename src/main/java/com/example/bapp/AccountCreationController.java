@@ -1,8 +1,11 @@
 package com.example.bapp;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -13,10 +16,12 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 
-public class AccountCreationController {
+public class AccountCreationController implements Initializable {
     @FXML
     private Button returnButton;
 
@@ -42,10 +47,20 @@ public class AccountCreationController {
     private TextField txtusername;
     @FXML
     private Text errorText;
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        Helper helper=new Helper();
+        helper.textLimit(txtaddress,80);
+        helper.textLimit(txtname,20);
+        helper.textLimit(txtsurname,20);
+        helper.textLimit(txtnumber,11);
+        helper.textLimit(txtpassword,20);
+        helper.textLimit(txtusername,20);
+    }
     @FXML
     void enteredRegister(MouseEvent a){registerButton.setStyle("-fx-background-color:#F8F1F1;-fx-cursor: hand;");}
     @FXML
-    public void exitedRegister(MouseEvent a){registerButton.setStyle("-fx-background-color:#E8AA42;-fx-cursor: default;");}
+    void exitedRegister(MouseEvent a){registerButton.setStyle("-fx-background-color:#E8AA42;-fx-cursor: default;");}
 
     @FXML
     void register(ActionEvent event){
@@ -55,27 +70,34 @@ public class AccountCreationController {
         String passwd = txtpassword.getText();
         String name = txtname.getText();
         String surname = txtsurname.getText();
+        try {
         long number = Long.parseLong(txtnumber.getText());
         String address = txtaddress.getText();
-        try {
+
             PreparedStatement preparedStatement = BankingApplication.connection.prepareStatement(
                     "INSERT INTO badb.bank_accounts (Name,Surname,Username,Password,Address,Phone_number) " +
                             "VALUES (\"" + name + "\",\"" + surname + "\",\"" + uname + "\",\"" + passwd + "\"," +
                             "\"" + address + "\"," + number + ")");
             preparedStatement.execute();
             System.out.println("user added!");
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             e.printStackTrace();
+        }
+        catch (NumberFormatException e){
+            errorText.setText("Please enter only numbers in phone number field");
+            errorText.setVisible(true);
         }
     }
         else {
+            errorText.setText("Please,enter needed information");
             errorText.setVisible(true);
         }
     }
     @FXML
     void enteredReturn(MouseEvent a){returnButton.setStyle("-fx-background-color:#F8F1F1;-fx-cursor: hand;");}
     @FXML
-    public void exitedReturn(MouseEvent a){returnButton.setStyle("-fx-background-color:#E8AA42;-fx-cursor: default;");}
+    void exitedReturn(MouseEvent a){returnButton.setStyle("-fx-background-color:#E8AA42;-fx-cursor: default;");}
     @FXML
     void returnButton(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(BankingApplication.class.getResource("BA.fxml"));
@@ -85,5 +107,6 @@ public class AccountCreationController {
         stage.setScene(scene);
         stage.show();
     }
+
 
 }

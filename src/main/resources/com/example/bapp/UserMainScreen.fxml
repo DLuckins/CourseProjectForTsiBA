@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="500.0" prefWidth="785.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bapp.UserMainScreenController">
+   <children>
+      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #E57C23;">
+         <top>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Text fx:id="balance" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Balance:">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="welcomeText" layoutX="366.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome," AnchorPane.topAnchor="0.0">
+                     <font>
+                        <Font name="Bell MT" size="24.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="id" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID:">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="260.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="What do you want to do today?">
+                     <font>
+                        <Font name="Bell MT" size="24.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+         </top>
+         <bottom>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="depositButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#depositButtonClick" onMouseEntered="#enteredDepositButton" onMouseExited="#exitedDepositButton" style="-fx-background-color: #E8AA42;" text="Deposit money">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
+         </bottom>
+      </BorderPane>
+      <AnchorPane fx:id="depositPanel" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #E57C23;" visible="false">
+         <children>
+            <Text layoutX="206.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="How much money you want to deposit?">
+               <font>
+                  <Font name="Bell MT" size="24.0" />
+               </font>
+            </Text>
+            <TextField layoutX="313.0" layoutY="92.0" promptText="Enter amount">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <Text layoutX="359.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Amount">
+               <font>
+                  <Font name="Bell MT" size="24.0" />
+               </font>
+            </Text>
+            <Button layoutX="361.0" layoutY="162.0" mnemonicParsing="false" style="-fx-background-color: #E8AA42;" text="Add">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Button>
+            <Button fx:id="closeDeposit" layoutX="744.0" layoutY="1.0" mnemonicParsing="false" onAction="#closeDepositClick" style="-fx-background-color: #E57C23;" text="✖">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
