@@ -1,5 +1,8 @@
 package com.example.bapp;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 public class User {
     private int id;
     private String name;
@@ -73,5 +76,10 @@ public class User {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+    public void updateBalanceDB() throws SQLException {
+        PreparedStatement preparedStatement = BankingApplication.connection.prepareStatement(
+                "UPDATE badb.bank_accounts SET Money = \"" +this.money+ "\" WHERE id = \"" + this.id + "\"");
+        preparedStatement.execute();
     }
 }

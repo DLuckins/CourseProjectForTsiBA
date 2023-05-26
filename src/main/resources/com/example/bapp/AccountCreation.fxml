@@ -108,7 +108,7 @@
                         <Font name="Bell MT" size="18.0" />
                      </font>
                   </Button>
-                  <Text fx:id="errorText" fill="#d43232" layoutX="91.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Some fields are missing, fill every field" visible="false">
+                  <Text fx:id="errorText" fill="#941f1f" layoutX="91.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Some fields are missing, fill every field" visible="false">
                      <font>
                         <Font name="Bell MT" size="14.0" />
                      </font>

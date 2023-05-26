@@ -55,7 +55,7 @@
                   <Font name="Bell MT" size="18.0" />
                </font>
             </Button>
-            <Text fx:id="errorText" fill="#d43232" layoutX="133.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Some fields are missing" visible="false">
+            <Text fx:id="errorText" fill="#941f1f" layoutX="133.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Some fields are missing" visible="false">
                <font>
                   <Font name="Bell MT" size="14.0" />
                </font>
