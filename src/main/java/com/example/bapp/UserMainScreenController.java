@@ -11,7 +11,6 @@ import javafx.scene.text.Text;
 
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.InputMismatchException;
 import java.util.ResourceBundle;
 
 public class UserMainScreenController implements Initializable {
