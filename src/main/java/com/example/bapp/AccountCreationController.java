@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
@@ -63,7 +64,7 @@ public class AccountCreationController implements Initializable {
     void exitedRegister(MouseEvent a){registerButton.setStyle("-fx-background-color:#E8AA42;-fx-cursor: default;");}
 
     @FXML
-    void register(ActionEvent event){
+    void register(ActionEvent event) throws IOException{
         if(!txtusername.getText().isBlank()&&!txtpassword.getText().isBlank()&&!txtname.getText().isBlank()&&
                 !txtsurname.getText().isBlank()&&!txtnumber.getText().isBlank()&&!txtaddress.getText().isBlank()) {
         String uname = txtusername.getText();
@@ -79,6 +80,22 @@ public class AccountCreationController implements Initializable {
                             "VALUES (\"" + name + "\",\"" + surname + "\",\"" + uname + "\",\"" + passwd + "\"," +
                             "\"" + address + "\"," + number + ")");
             preparedStatement.execute();
+            preparedStatement = BankingApplication.connection.prepareStatement(
+                    "SELECT id FROM badb.bank_accounts WHERE username = \"" + uname + "\" AND" +
+                            " password = \"" + passwd + "\"");
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                UserMainScreenController.user = new User(rs.getInt("id"),
+                        name,
+                        surname,
+                        uname,
+                        0,
+                        number,
+                        address,
+                        0);
+            }
+            Helper helper =new Helper();
+            helper.newScene(event,"BankingApp","UserMainScreen.fxml");
             System.out.println("user added!");
         }
         catch (SQLException e) {

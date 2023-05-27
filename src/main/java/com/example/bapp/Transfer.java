@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Transfer {
+    private int operationID=0;
     private int idFrom;
     private String nameFrom;
     private String surnameFrom;
@@ -15,6 +16,20 @@ public class Transfer {
     private double moneyTo;
     public boolean notFound=false;
 
+    public Transfer(int operationID, int idFrom, String nameFrom, String surnameFrom,
+                       double amount, int idTo, String nameTo, String surnameTo) {
+        this.operationID = operationID;
+        this.idFrom = idFrom;
+        this.nameFrom = nameFrom;
+        this.surnameFrom = surnameFrom;
+        this.amount = amount;
+        this.idTo = idTo;
+        this.nameTo = nameTo;
+        this.surnameTo = surnameTo;
+    }
+    public Transfer(){
+
+    }
     public Transfer(int idTo, String nameTo,double amount){
         this.idTo=idTo;
         this.nameTo=nameTo;
@@ -52,6 +67,36 @@ public class Transfer {
             }
             else{
                 notFound=true;
+            }
+        }
+    }
+    public void revert(int opID) throws SQLException{
+        PreparedStatement preparedStatement = BankingApplication.connection.prepareStatement(
+                "SELECT count(1) FROM badb.operations WHERE operationID = \"" + opID + "\"");
+        ResultSet resultset = preparedStatement.executeQuery();
+        while (resultset.next()) {
+            if (resultset.getInt(1) == 1) {
+                double amount=0;
+                int idTo=0;
+                int idFrom=0;
+                preparedStatement = BankingApplication.connection.prepareStatement(
+                        "SELECT idFrom,idTo,amount FROM badb.operations WHERE operationID = \"" + opID + "\"");
+                ResultSet rs = preparedStatement.executeQuery();
+                while (rs.next()) {
+                    idTo = rs.getInt("idTo");
+                    idFrom = rs.getInt("idFrom");
+                    amount = rs.getDouble("amount");
+                }
+                preparedStatement = BankingApplication.connection.prepareStatement(
+                        "UPDATE badb.bank_accounts SET Money = (Money+" + amount + ") WHERE id = \""+ idFrom + "\"");
+                preparedStatement.execute();
+                preparedStatement = BankingApplication.connection.prepareStatement(
+                        "UPDATE badb.bank_accounts SET Money = (Money-" + amount + ") WHERE id = \""+ idTo + "\"");
+                preparedStatement.execute();
+                preparedStatement = BankingApplication.connection.prepareStatement(
+                        "DELETE FROM badb.operations WHERE operationID = \""+ opID + "\"");
+                preparedStatement.execute();
+
             }
         }
     }
@@ -120,7 +165,11 @@ public class Transfer {
         this.surnameTo = surnameTo;
     }
 
+    public int getOperationID() {
+        return operationID;
+    }
 
-
-
+    public void setOperationID(int operationID) {
+        this.operationID = operationID;
+    }
 }

@@ -11,8 +11,9 @@ public class User {
     private double money;
     private long number;
     private String address;
+    private double loanAmount;
 
-    public User(int id, String name, String surname, String username, double money, long number, String address) {
+    public User(int id, String name, String surname, String username, double money, long number, String address, double loan) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -20,6 +21,7 @@ public class User {
         this.money = money;
         this.number = number;
         this.address = address;
+        this.loanAmount=loan;
     }
 
     public int getId() {
@@ -77,9 +79,34 @@ public class User {
     public void setAddress(String address) {
         this.address = address;
     }
+
+    public double getLoanAmount() {
+        return loanAmount;
+    }
+
+    public void setLoanAmount(double loanAmount) {
+        this.loanAmount = loanAmount;
+    }
+
     public void updateBalanceDB() throws SQLException {
         PreparedStatement preparedStatement = BankingApplication.connection.prepareStatement(
                 "UPDATE badb.bank_accounts SET Money = \"" +this.money+ "\" WHERE id = \"" + this.id + "\"");
         preparedStatement.execute();
     }
+    public void takeLoanDB(double amount) throws SQLException{
+        PreparedStatement preparedStatement = BankingApplication.connection.prepareStatement(
+                "UPDATE badb.bank_accounts SET Loan = \"" +(this.loanAmount+(amount*1.2))+ "\" WHERE id = \"" + this.id + "\"");
+        preparedStatement.execute();
+    }
+    public void payLoanDB(double amount) throws SQLException{
+        PreparedStatement preparedStatement = BankingApplication.connection.prepareStatement(
+                "UPDATE badb.bank_accounts SET Loan = \"" +(this.loanAmount-amount)+ "\" WHERE id = \"" + this.id + "\"");
+        preparedStatement.execute();
+    }
+    public void deleteUser() throws SQLException{
+        PreparedStatement preparedStatement = BankingApplication.connection.prepareStatement(
+                "DELETE FROM badb.bank_accounts WHERE id = \"" + this.id + "\"");
+        preparedStatement.execute();
+    }
+
 }

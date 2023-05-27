@@ -12,7 +12,7 @@
 
 <AnchorPane prefHeight="500.0" prefWidth="785.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bapp.UserMainScreenController">
    <children>
-      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #E57C23;">
+      <BorderPane fx:id="mainPanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #E57C23;">
          <top>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
@@ -69,6 +69,26 @@
                               <Font size="24.0" />
                            </font>
                         </Button>
+                        <Button mnemonicParsing="false" onAction="#loanButton" onMouseEntered="#enteredButton" onMouseExited="#exitedButton" prefWidth="214.0" style="-fx-background-color: #E8AA42;" text="Get a loan" GridPane.rowIndex="1">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#payoffButton" onMouseEntered="#enteredButton" onMouseExited="#exitedButton" prefWidth="214.0" style="-fx-background-color: #E8AA42;" text="Payoff a loan" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#deleteAccountButton" onMouseEntered="#enteredButton" onMouseExited="#exitedButton" prefWidth="214.0" style="-fx-background-color: #E8AA42;" text="Delete account" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#Exit" onMouseEntered="#enteredButton" onMouseExited="#exitedButton" prefWidth="214.0" style="-fx-background-color: #E8AA42;" text="Exit" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Button>
                      </children>
                   </GridPane>
                </children>
@@ -97,7 +117,7 @@
                   <Font size="24.0" />
                </font>
             </Button>
-            <Button layoutX="744.0" layoutY="1.0" mnemonicParsing="false" onAction="#closeDepositClick" onMouseEntered="#enteredCloseButton" onMouseExited="#exitedCloseButton" style="-fx-background-color: #E57C23;" text="✖">
+            <Button layoutX="744.0" layoutY="1.0" mnemonicParsing="false" onAction="#closeClick" onMouseEntered="#enteredCloseButton" onMouseExited="#exitedCloseButton" style="-fx-background-color: #E57C23;" text="✖">
                <font>
                   <Font size="24.0" />
                </font>
@@ -131,7 +151,7 @@
                   <Font size="24.0" />
                </font>
             </Button>
-            <Button layoutX="744.0" layoutY="1.0" mnemonicParsing="false" onAction="#closeWithdrawClick" onMouseEntered="#enteredCloseButton" onMouseExited="#exitedCloseButton" style="-fx-background-color: #E57C23;" text="✖">
+            <Button layoutX="744.0" layoutY="1.0" mnemonicParsing="false" onAction="#closeClick" onMouseEntered="#enteredCloseButton" onMouseExited="#exitedCloseButton" style="-fx-background-color: #E57C23;" text="✖">
                <font>
                   <Font size="24.0" />
                </font>
@@ -165,7 +185,7 @@
                   <Font size="24.0" />
                </font>
             </Button>
-            <Button layoutX="744.0" layoutY="1.0" mnemonicParsing="false" onAction="#closeTransferClick" onMouseEntered="#enteredCloseButton" onMouseExited="#exitedCloseButton" style="-fx-background-color: #E57C23;" text="✖">
+            <Button layoutX="744.0" layoutY="1.0" mnemonicParsing="false" onAction="#closeClick" onMouseEntered="#enteredCloseButton" onMouseExited="#exitedCloseButton" style="-fx-background-color: #E57C23;" text="✖">
                <font>
                   <Font size="24.0" />
                </font>
@@ -195,6 +215,108 @@
                   <Font name="Bell MT" size="24.0" />
                </font>
             </Text>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="loanPanel" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #E57C23;" visible="false">
+         <children>
+            <Text layoutX="237.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="In this menu you can take a loan,">
+               <font>
+                  <Font name="Bell MT" size="24.0" />
+               </font>
+            </Text>
+            <TextField fx:id="loanAmount" layoutX="313.0" layoutY="92.0" promptText="Enter amount">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <Text layoutX="359.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Amount">
+               <font>
+                  <Font name="Bell MT" size="24.0" />
+               </font>
+            </Text>
+            <Button layoutX="324.0" layoutY="162.0" mnemonicParsing="false" onAction="#takeLoanClick" onMouseEntered="#enteredButton" onMouseExited="#exitedButton" style="-fx-background-color: #E8AA42;" text="Take a loan">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Button>
+            <Button layoutX="744.0" layoutY="1.0" mnemonicParsing="false" onAction="#closeClick" onMouseEntered="#enteredCloseButton" onMouseExited="#exitedCloseButton" style="-fx-background-color: #E57C23;" text="✖">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Button>
+            <Text fx:id="loanError" fill="#941f1f" layoutX="175.0" layoutY="255.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" visible="false" wrappingWidth="450.0">
+               <font>
+                  <Font name="Bell MT" size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="200.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="which you will need to pay off at rate 1.2">
+               <font>
+                  <Font name="Bell MT" size="24.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="payOffPanel" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #E57C23;" visible="false">
+         <children>
+            <Text fx:id="loanText" layoutX="194.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Current loan: " textAlignment="CENTER" wrappingWidth="411.01171875">
+               <font>
+                  <Font name="Bell MT" size="24.0" />
+               </font>
+            </Text>
+            <TextField fx:id="payOffAmount" layoutX="313.0" layoutY="92.0" promptText="Enter amount">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <Text layoutX="359.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Amount">
+               <font>
+                  <Font name="Bell MT" size="24.0" />
+               </font>
+            </Text>
+            <Button layoutX="346.0" layoutY="164.0" mnemonicParsing="false" onAction="#payOffClick" onMouseEntered="#enteredButton" onMouseExited="#exitedButton" style="-fx-background-color: #E8AA42;" text="Pay off">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Button>
+            <Button layoutX="744.0" layoutY="1.0" mnemonicParsing="false" onAction="#closeClick" onMouseEntered="#enteredCloseButton" onMouseExited="#exitedCloseButton" style="-fx-background-color: #E57C23;" text="✖">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Button>
+            <Text fx:id="payOffError" fill="#941f1f" layoutX="175.0" layoutY="255.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" visible="false" wrappingWidth="450.0">
+               <font>
+                  <Font name="Bell MT" size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="229.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="How much do you want to pay off?">
+               <font>
+                  <Font name="Bell MT" size="24.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="deletePanel" layoutX="189.0" layoutY="100.0" maxWidth="1.7976931348623157E308" prefHeight="300.0" prefWidth="400.0" style="-fx-background-color: #E57C23;" visible="false">
+         <children>
+            <Text layoutX="7.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Are you sure you want to delete account?">
+               <font>
+                  <Font name="Bell MT" size="24.0" />
+               </font>
+            </Text>
+            <Button layoutX="73.0" layoutY="109.0" mnemonicParsing="false" onAction="#deleteAccount" onMouseEntered="#enteredButton" onMouseExited="#exitedButton" style="-fx-background-color: #E8AA42;" text="Delete">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Button>
+            <Button layoutX="344.0" mnemonicParsing="false" onAction="#closeClick" onMouseEntered="#enteredCloseButton" onMouseExited="#exitedCloseButton" style="-fx-background-color: #E57C23;" text="✖">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Button>
+            <Button layoutX="240.0" layoutY="109.0" mnemonicParsing="false" onAction="#closeClick" onMouseEntered="#enteredButton" onMouseExited="#exitedButton" style="-fx-background-color: #E8AA42;" text="Return">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
    </children>
