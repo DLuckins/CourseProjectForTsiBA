@@ -65,45 +65,61 @@ public class AccountCreationController implements Initializable {
     void register(ActionEvent event) throws IOException{
         if(!txtusername.getText().isBlank()&&!txtpassword.getText().isBlank()&&!txtname.getText().isBlank()&&
                 !txtsurname.getText().isBlank()&&!txtnumber.getText().isBlank()&&!txtaddress.getText().isBlank()) {
-        String uname = txtusername.getText();
-        String passwd = txtpassword.getText();
-        String name = txtname.getText();
-        String surname = txtsurname.getText();
-        try {
-        long number = Long.parseLong(txtnumber.getText());
-        String address = txtaddress.getText();
+            String uname = txtusername.getText();
+            try {
 
-            PreparedStatement preparedStatement = BankingApplication.connection.prepareStatement(
-                    "INSERT INTO badb.bank_accounts (Name,Surname,Username,Password,Address,Phone_number) " +
-                            "VALUES (\"" + name + "\",\"" + surname + "\",\"" + uname + "\",\"" + passwd + "\"," +
-                            "\"" + address + "\"," + number + ")");
-            preparedStatement.execute();
-            preparedStatement = BankingApplication.connection.prepareStatement(
-                    "SELECT id FROM badb.bank_accounts WHERE username = \"" + uname + "\" AND" +
-                            " password = \"" + passwd + "\"");
-            ResultSet rs = preparedStatement.executeQuery();
-            while (rs.next()) {
-                UserMainScreenController.user = new User(rs.getInt("id"),
-                        name,
-                        surname,
-                        uname,
-                        0,
-                        number,
-                        address,
-                        0);
+                PreparedStatement preparedStatement = BankingApplication.connection.prepareStatement(
+                        "SELECT count(1) FROM badb.bank_accounts WHERE username = \"" + uname + "\"");
+                ResultSet resultset = preparedStatement.executeQuery();
+                while (resultset.next()) {
+                    if (resultset.getInt(1) == 1) {
+                        errorText.setText("Username already exists");
+                        errorText.setVisible(true);
+                    }
+                    else{
+                        String passwd = txtpassword.getText();
+                        String name = txtname.getText();
+                        String surname = txtsurname.getText();
+                        try {
+                            long number = Long.parseLong(txtnumber.getText());
+                            String address = txtaddress.getText();
+
+                            preparedStatement = BankingApplication.connection.prepareStatement(
+                                    "INSERT INTO badb.bank_accounts (Name,Surname,Username,Password,Address,Phone_number) " +
+                                            "VALUES (\"" + name + "\",\"" + surname + "\",\"" + uname + "\",\"" + passwd + "\"," +
+                                            "\"" + address + "\"," + number + ")");
+                            preparedStatement.execute();
+                            preparedStatement = BankingApplication.connection.prepareStatement(
+                                    "SELECT id FROM badb.bank_accounts WHERE username = \"" + uname + "\" AND" +
+                                            " password = \"" + passwd + "\"");
+                            ResultSet rs = preparedStatement.executeQuery();
+                            while (rs.next()) {
+                                UserMainScreenController.user = new User(rs.getInt("id"),
+                                        name,
+                                        surname,
+                                        uname,
+                                        0,
+                                        number,
+                                        address,
+                                        0);
+                            }
+                            Helper helper = new Helper();
+                            helper.newScene(event, "BankingApp", "UserMainScreen.fxml");
+                            System.out.println("user added!");
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        } catch (NumberFormatException e) {
+                            errorText.setText("Please enter only numbers in phone number field");
+                            errorText.setVisible(true);
+                        }
+                    }
+                }
             }
-            Helper helper =new Helper();
-            helper.newScene(event,"BankingApp","UserMainScreen.fxml");
-            System.out.println("user added!");
+            catch (SQLException e){
+
+            }
+
         }
-        catch (SQLException e) {
-            e.printStackTrace();
-        }
-        catch (NumberFormatException e){
-            errorText.setText("Please enter only numbers in phone number field");
-            errorText.setVisible(true);
-        }
-    }
         else {
             errorText.setText("Please,enter needed information");
             errorText.setVisible(true);
