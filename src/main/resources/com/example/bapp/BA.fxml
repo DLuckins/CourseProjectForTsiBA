@@ -40,41 +40,70 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bapp.StartScreenController">
-   <left>
-      <AnchorPane prefHeight="500.0" prefWidth="400.0" style="-fx-background-color: #ffffff;" BorderPane.alignment="CENTER">
+
+<AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bapp.StartScreenController">
+   <children>
+      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0">
+         <left>
+            <AnchorPane prefHeight="500.0" prefWidth="400.0" style="-fx-background-color: #ffffff;" BorderPane.alignment="CENTER">
+               <children>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="126.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@logo.png" />
+                     </image>
+                  </ImageView>
+                  <Text fill="#ba3b0a" layoutX="24.0" layoutY="233.0" strokeType="OUTSIDE" strokeWidth="0.0" text="For those who protects their money">
+                     <font>
+                        <Font name="Bell MT" size="24.0" />
+                     </font>
+                  </Text>
+                  <ImageView fitHeight="40.0" fitWidth="50.0" layoutY="460.0" onMouseClicked="#helpOnClick" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@help.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+         </left>
+         <right>
+            <AnchorPane prefHeight="500.0" prefWidth="400.0" style="-fx-background-color: #E57C23;" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="loginButton" layoutX="158.0" layoutY="205.0" mnemonicParsing="false" onAction="#loginOnClick" onMouseEntered="#enteredLogin" onMouseExited="#exitedLogin" style="-fx-background-color: #E8AA42;" text="Login">
+                     <font>
+                        <Font name="Bell MT" size="18.0" />
+                     </font>
+                  </Button>
+                  <Text layoutX="36.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to BA">
+                     <font>
+                        <Font name="Bell MT" size="48.0" />
+                     </font>
+                  </Text>
+                  <Button fx:id="createButton" layoutX="114.0" layoutY="250.0" mnemonicParsing="false" onAction="#createOnClick" onMouseEntered="#enteredCreate" onMouseExited="#exitedCreate" style="-fx-background-color: #E8AA42;" text="Create an account">
+                     <font>
+                        <Font name="Bell MT" size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
+         </right>
+      </BorderPane>
+      <AnchorPane fx:id="helpPane" onMouseClicked="#helpCloseOnClick" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: rgba(0, 0, 0, 0.5); -fx-background-radius: 10;" visible="false">
          <children>
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="126.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@logo.png" />
-               </image>
-            </ImageView>
-            <Text fill="#ba3b0a" layoutX="24.0" layoutY="233.0" strokeType="OUTSIDE" strokeWidth="0.0" text="For those who protects their money">
-               <font>
-                  <Font name="Bell MT" size="24.0" />
-               </font>
-            </Text>
-         </children></AnchorPane>
-   </left>
-   <right>
-      <AnchorPane prefHeight="500.0" prefWidth="400.0" style="-fx-background-color: #E57C23;" BorderPane.alignment="CENTER">
-         <children>
-            <Button fx:id="loginButton" layoutX="158.0" layoutY="205.0" mnemonicParsing="false" onAction="#loginOnClick" onMouseEntered="#enteredLogin" onMouseExited="#exitedLogin" style="-fx-background-color: #E8AA42;" text="Login">
-               <font>
-                  <Font name="Bell MT" size="18.0" />
-               </font>
-            </Button>
-            <Text layoutX="36.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to BA">
-               <font>
-                  <Font name="Bell MT" size="48.0" />
-               </font>
-            </Text>
-            <Button fx:id="createButton" layoutX="114.0" layoutY="250.0" mnemonicParsing="false" onAction="#createOnClick" onMouseEntered="#enteredCreate" onMouseExited="#exitedCreate" style="-fx-background-color: #E8AA42;" text="Create an account">
-               <font>
-                  <Font name="Bell MT" size="18.0" />
-               </font>
-            </Button>
+            <AnchorPane layoutX="50.0" layoutY="50.0" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: E8AA42;">
+               <children>
+                  <Text layoutX="315.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Help">
+                     <font>
+                        <Font name="Bell MT" size="36.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="21.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="This is application for storing money: &quot;BA&quot;, if you are not registered, then register, and if you are already registered, then log into your account, where you can, deposit money, withdraw money and more" wrappingWidth="658.9367370605469">
+                     <font>
+                        <Font name="Bell MT" size="24.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
          </children>
       </AnchorPane>
-   </right>
-</BorderPane>
+   </children>
+</AnchorPane>

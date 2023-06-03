@@ -65,7 +65,8 @@ public class AccountCreationController implements Initializable {
     void register(ActionEvent event) throws IOException{
         if(!txtusername.getText().isBlank()&&!txtpassword.getText().isBlank()&&!txtname.getText().isBlank()&&
                 !txtsurname.getText().isBlank()&&!txtnumber.getText().isBlank()&&!txtaddress.getText().isBlank()) {
-            String uname = txtusername.getText();
+            String uname =Encoding.encode(txtusername.getText()) ;
+
             try {
 
                 PreparedStatement preparedStatement = BankingApplication.connection.prepareStatement(
@@ -77,7 +78,7 @@ public class AccountCreationController implements Initializable {
                         errorText.setVisible(true);
                     }
                     else{
-                        String passwd = txtpassword.getText();
+                        String passwd = Encoding.encode(txtpassword.getText());
                         String name = txtname.getText();
                         String surname = txtsurname.getText();
                         try {

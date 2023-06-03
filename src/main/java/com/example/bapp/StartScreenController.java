@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.net.URL;
@@ -15,6 +16,8 @@ public class StartScreenController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
+    @FXML
+    private AnchorPane helpPane;
     @FXML
     Button loginButton;
     @FXML
@@ -43,5 +46,11 @@ public class StartScreenController implements Initializable {
         Helper helper =new Helper();
         helper.newScene(a,"CreateAccount","AccountCreation.fxml");
 
+    }
+    public void helpOnClick(MouseEvent e) {
+        helpPane.setVisible(true);
+    }
+    public void helpCloseOnClick(MouseEvent e) {
+        helpPane.setVisible(false);
     }
 }

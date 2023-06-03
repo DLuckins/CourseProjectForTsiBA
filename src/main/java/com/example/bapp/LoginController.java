@@ -47,8 +47,11 @@ public class LoginController implements Initializable {
                 Helper helper=new Helper();
                 helper.newScene(event,"Admin","AdminScreen.fxml");
             }
+
             else {
                 try {
+                    username = Encoding.encode(txtusername.getText());
+                    password = Encoding.encode(txtpassword.getText());
                     PreparedStatement preparedStatement = BankingApplication.connection.prepareStatement(
                             "SELECT count(1) FROM badb.bank_accounts WHERE username = \"" + username + "\" AND" +
                                     " password = \"" + password + "\"");
