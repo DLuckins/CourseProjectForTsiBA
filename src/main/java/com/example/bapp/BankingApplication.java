@@ -24,7 +24,7 @@ public class BankingApplication extends Application {
     public Connection sqlConnection(){
         String url="jdbc:mysql://localhost:3306/badb";
         String user="root";
-        String password="1234AsDf";
+        String password="12345678";
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection connection= DriverManager.getConnection(url,user,password);
