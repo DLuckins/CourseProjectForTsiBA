@@ -285,11 +285,11 @@ public class UserMainScreenController implements Initializable {
                 double amount = Double.parseDouble(transferAmount.getText());
                 int id = Integer.parseInt(transferID.getText());
                 if(amount>user.getMoney()) {
-                    transferError.setText("Please enter positive number");
+                    transferError.setText("Not enough money!");
                     transferError.setVisible(true);
                 }
                 else if(amount<=0){
-                    transferError.setText("Not enough money!");
+                    transferError.setText("Please enter positive number");
                     transferError.setVisible(true);
                 }
                 else{

@@ -188,10 +188,12 @@ public class AdminScreenController implements Initializable {
         ResultSet rs = preparedStatement.executeQuery();
         List<User> userList=new ArrayList<>();
         while (rs.next()) {
+            String tuname=rs.getString("Username");
+            String uname = Encoding.decode(tuname);
             User user=new User(rs.getInt("id"),
                     rs.getString("Name"),
                     rs.getString("Surname"),
-                    rs.getString("Username"),
+                    uname,
                     rs.getDouble("Money"),
                     rs.getLong("Phone_number"),
                     rs.getString("Address"),

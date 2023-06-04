@@ -9,4 +9,9 @@ public class Encoding {
                 StringBuilder :: appendCodePoint,
                 StringBuilder :: append ).toString();
     }
+    public static String decode(String text){
+        return text.chars().mapToObj(ch -> (char) ch-10).collect(StringBuilder :: new,
+                StringBuilder :: appendCodePoint,
+                StringBuilder :: append ).toString();
+    }
 }
